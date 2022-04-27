@@ -1,0 +1,26 @@
+#include <SD.h>
+#include <SPI.h>
+char a = 1;
+File sdkart;
+int pinCS = 10;
+void setup(){
+  Serial.begin(9600);
+  pinMode(pinCS, OUTPUT);
+
+  if(SD.begin()){
+    Serial.println("ok");
+    
+    }
+  else{
+    Serial.println("nope");
+    return;
+    }
+  }
+void loop(){
+    sdkart = SD.open("t.txt");  
+    while (sdkart.available()) {
+      Serial.println(char(sdkart.read()));
+    }
+    sdkart.close();
+}
+
