@@ -1,0 +1,35 @@
+#include <SD.h>
+#include <SPI.h>
+char a = 1;
+File sdkart;
+int pinCS = 10;
+void setup(){
+  Serial.begin(9600);
+  pinMode(pinCS, OUTPUT);
+
+  if(SD.begin()){
+    Serial.println("ok");
+    
+    }
+  else{
+    Serial.println("nope");
+    return;
+    }
+  }
+void loop(){
+  
+  a = Serial.read();
+  if(a != -1 ){Serial.print(a);
+  sdkart = SD.open("c.txt", FILE_WRITE);   
+  if(sdkart){
+    sdkart.print(char(a));
+    sdkart.close();
+    }
+  else{
+    Serial.println("data.txt açılamadı");
+    }}
+
+
+
+ delay(100);
+  }
